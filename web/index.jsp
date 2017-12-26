@@ -19,7 +19,7 @@
      </head>
     <body >
         <div class="wrapper">
-		<p><h1 style =" color:orange">LICEO JOSE CARMEN DI PIETRO</h1>
+		<p><h1 style =" color:orange">LICEO JOSE CARMEN DI PIETRO!!!</h1>
             <form class="login" method="post" id="frm-login" action="Login">
                 <div align ="center">
 		<img src ="resources/img/escudo.png" width= "225" height="175" align="center"><p>
