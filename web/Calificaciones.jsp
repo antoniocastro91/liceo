@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="Controlador.ControladorMaterias"%>
 <%@page import="Include.Materia"%>
 <%@page import="Include.Alumno"%>
@@ -19,7 +20,7 @@
                                         <%
                                             ControladorMaterias cm = new ControladorMaterias();
                                             Materia m = new Materia();
-                                            List<Materias> lm = cm.
+                                            List<Materia> lm = cm.listar_materias();
                                         %>
                                     </select>
                                 </div>

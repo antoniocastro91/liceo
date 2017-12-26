@@ -50,23 +50,21 @@ public class ModeloMateria extends Conexion{
      public List<Materia>listar_materias(){
      List<Materia> lista_materia = new ArrayList<>();
         try {
-            Statement statement = this.c.getConexion().createStatement();
-            ResultSet rs = statement.executeQuery("select * from usuario");
+            Statement statement = this.c.getConnection().createStatement();
+            ResultSet rs = statement.executeQuery("select * from materias");
             while (rs.next()) {
                 
-                Usuario usuario = new Usuario();
-                usuario.setId_usuario(rs.getInt("id"));
-                usuario.setUsuario(rs.getString("usuario"));
-                usuario.setNivel(rs.getInt("nivel"));
-                usuario.setEstado(rs.getInt("estado"));
-                usuario.setEmail(rs.getString("email"));               
-                lista_usuarios.add(usuario);
+                Materia materia = new Materia();
+                materia.setIdmateria(rs.getInt("Id_Materia"));
+                materia.setMateria(rs.getString("Materia"));
+                           
+                lista_materia.add(materia);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return lista_usuarios;      
+        return lista_materia;      
     }
     
      

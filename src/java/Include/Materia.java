@@ -10,11 +10,25 @@ package Include;
  * @author Antonio Castro
  */
 public class Materia {
+    private Integer idmateria;
     private String materia;
 
 public Materia(){
        
     }
+    public Materia(Integer idmateria,String materia){
+        this.idmateria = idmateria;
+        this.materia = materia;
+    }
+
+    public Integer getIdmateria() {
+        return idmateria;
+    }
+
+    public void setIdmateria(Integer idmateria) {
+        this.idmateria = idmateria;
+    }
+
     public Materia(String materia){
         this.materia = materia;
     }

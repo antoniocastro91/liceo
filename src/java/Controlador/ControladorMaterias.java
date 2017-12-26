@@ -5,21 +5,27 @@
  */
 package Controlador;
 
+import Include.Direccion;
 import Include.Materia;
 import Modelo.ModeloMateria;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Antonio Castro
  */
 public class ControladorMaterias {
+    ModeloMateria mm = new ModeloMateria();
+    String error = "";
         public boolean insertar(Materia m){
         ModeloMateria mm = new ModeloMateria();
         return mm.insertarmaterias(m);
         }
         
-        public boolean visualizar(Materia m){
-        ModeloMateria mm = new ModeloMateria();
-        return mm.visualizarmaterias(m);
+      public List<Materia> listar_materias(){
+            List<Materia> lista_materia = new ArrayList<>();
+            lista_materia = this.mm.listar_materias();
+            return lista_materia;
         }
 }
