@@ -21,7 +21,7 @@ public class ModeloUsuario extends Conexion{
         ResultSet rs = null;
         
         try {
-            String consulta = "select p.usuario, p.Contraseña, d.Usuario, d.Contraseña  from profesores p, direccion d  where (p.Usuario = ? and p.Contraseña= ?) or (d.Usuario=? and d.Contraseña= ? )";
+            String consulta = "select p.usuario, p.Contraseña, d.Usuario, d.Contraseña  from profesores p, direccion d, rol r  where (p.Usuario = ? and p.Contraseña= ? and p.Estado = '1'  and p.Estado = r.Estado) or (d.Usuario=? and d.Contraseña= ? and d.Estado = '1' and d.Estado = r.Estado )";
             pst = getConnection().prepareStatement(consulta);
             pst.setString(1, p.getUsuario());
             pst.setString(2, p.getContraseña());

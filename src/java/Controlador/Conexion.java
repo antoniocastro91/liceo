@@ -55,7 +55,7 @@ public class Conexion {
         java.sql.PreparedStatement pst;
         ResultSet rs;
         int a =0;   
-        String sql ="select p.nivel, d.nivel from profesores p, direccion d, rol r where ((p.usuario='"+usuario+"' and p.contraseña='"+clave+"') or (d.usuario='"+ usuario + "' and d.contraseña='"+ clave + "'))  and p.estado=1 and d.estado =1 and p.estado = r.estado and d.estado = r.estado"; 
+        String sql ="select p.nivel, d.nivel from profesores p, direccion d, rol r where ((p.usuario='"+usuario+"' and p.contraseña='"+clave+"' and p.Estado = 1 and p.Estado = r.Estado) or (d.usuario='"+ usuario + "' and d.contraseña='"+ clave + "' and d.Estado = 1 and d.Estado = r.Estado))"; 
         try {
             Class.forName(this.classname);
             co=DriverManager.getConnection(
