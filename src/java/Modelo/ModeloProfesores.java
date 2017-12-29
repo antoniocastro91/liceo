@@ -8,6 +8,8 @@ package Modelo;
 import Controlador.Conexion;
 import Include.Profesores;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -31,6 +33,7 @@ public class ModeloProfesores extends Conexion {
             pst.setString(8, p.getContraseña());
             pst.setString(9, p.getNivel());
             pst.setString(10, p.getEstado());
+   
             
               if(pst.executeUpdate() == 1){
             flag = true;
@@ -48,4 +51,35 @@ public class ModeloProfesores extends Conexion {
         }
     return flag;
         }
+      
+      
+       public Profesores obtener_profesor_por_id(int id_profesor){
+     Profesores usuario = new Profesores();
+     PreparedStatement pst = null;
+        try {
+            String sql="select * from profesores where Id_Profesor = ?";
+            pst = getConnection().prepareStatement(sql);
+            pst.setInt(1, id_profesor);
+            pst.executeQuery();
+            ResultSet rs = pst.getResultSet();
+            while (rs.next()) {
+                usuario.setId_Profesor(rs.getInt("Id_Profesor"));
+                usuario.setNomProfesor(rs.getString("Nombre"));
+                usuario.setApeProfesor(rs.getString("Apellido"));
+                usuario.setTelefono(rs.getString("Telefono"));
+                usuario.setDui(rs.getString("Dui"));  
+                usuario.setNip(rs.getString("NIP"));  
+                usuario.setUsuario(rs.getString("Usuario"));  
+                usuario.setContraseña(rs.getString("Contraseña"));  
+                usuario.setNivel(rs.getString("Nivel"));  
+                usuario.setEstado(rs.getString("Estado"));  
+                usuario.setId_Grado(rs.getInt("Id_Grado"));  
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return usuario;      
+    }
 }

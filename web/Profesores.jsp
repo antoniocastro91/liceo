@@ -1,62 +1,15 @@
-<%-- 
-    Document   : Profesores
-    Created on : 12-12-2017, 10:17:11 PM
-    Author     : Victor
---%>
-
+<%@page import="Include.Grado"%>
+<%@page import="Controlador.ControladorProfesores"%>
+<%@page import="Include.Profesores"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Materias</title>
-        <link rel="stylesheet" href="resources/css/profesores.css">
-         <link rel="stylesheet" href="resources/boostrap/bootstrap.min.css">
-         <link rel="stylesheet" href="resources/fonts/glyphicons-halflings-regular.eot">
-         <link rel="stylesheet" href="glyphicons-halflglyphicons-halflings-regular.svg">
-         <link rel="stylesheet" href="glyphicons-halflglyphicons-halflings-regular.ttf">
-         <link rel="stylesheet" href="glyphicons-halflglyphicons-halflings-regular.woff">
-    </head>
-    <body>
-      <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Menu Navegacion</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-        <a class="navbar-brand" href="Menu.jsp">Inicio</a>
-    </div>
+<jsp:include page="header.jsp"/>
+<% 
+    Profesores profe = new Profesores();
+    Grado grado = new Grado();
+    Controlador.ControladorProfesores controladorProfe = new ControladorProfesores();
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-       
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administracion<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="Direccion.jsp">Direccion</a></li>  
-            <li><a href="Alumnos.jsp">Alumnos</a></li>
-            <li><a href="Profesores.jsp">Profesores</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="Materias.jsp">Materias</a></li>
-            <li><a href="Grado.jsp">Grados</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="Trimestre.jsp">Trimestre</a></li>
-          </ul>
-        </li>
-          <li><a href="Notas.jsp">Notas</a></li>
-          <li><a href="Notas.jsp">Acerca de</a></li>
-          <li><a href="Notas.jsp">Reportes</a></li>
-          <li><a href="Notas.jsp">Cerrar Sesion</a></li>
-      </ul>
-   
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+%>
+  
         <div class="container">
             <div class="row main">
                 <div class="main-login main-center">
@@ -122,14 +75,20 @@
                                      <label for="name" class="cols-sm-3 control-label">Nivel del usuario</label>
                                         <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                    <input type="text" id="Nivel" name="Nivel" class="form-control" placeholder="Nivel del usuario"/>
+                                                    <select type="Estado" id="Nivel" name="Nivel" class="form-control">
+                                                   <option <% if(profe.getNivel()== "1"){ %> selected <% }%> value="1">Administrador</option> 
+                                                   <option <% if(profe.getNivel()== "2"){ %> selected <% }%> value="2">Usuario</option> 
+                                                </select>
                                          </div>
                                 </div>
                                <div class="form-group">
                                      <label for="name" class="cols-sm-3 control-label">Estado del usuario</label>
                                         <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                    <input type="text"  id="Estado" name="Estado" class="form-control" placeholder="Digite el Estado del usuario"/>
+                                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                <select type="Estado" id="asigrado" name="Estado" class="form-control">
+                                                   <option <% if(profe.getEstado()== "1"){ %> selected <% }%> value="1">Activo</option> 
+                                                   <option <% if(profe.getEstado()== "0"){ %> selected <% }%> value="0">Inactivo</option> 
+                                                </select>
                                          </div>
                                 </div>
                                  <div class="form-group ">

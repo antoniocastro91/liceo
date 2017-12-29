@@ -13,8 +13,11 @@ import Modelo.ModeloUsuario;
  * @author Antonio Castro
  */
 public class ControladorUsuario {
+        public String error;
         public boolean validar(Profesores p){
-        ModeloUsuario mu = new ModeloUsuario();
-        return mu.autentication(p);
+            ModeloUsuario mu = new ModeloUsuario();
+            boolean autenticado = mu.autentication(p);
+            error = mu.error;
+            return autenticado;
     }
 }

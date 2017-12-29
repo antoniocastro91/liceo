@@ -25,7 +25,7 @@ public class ControladorMaterias {
         
       public List<Materia> listar_materias(){
             List<Materia> lista_materia = new ArrayList<>();
-            lista_materia = this.mm.listar_materias();
+            lista_materia = this.mm.listar_Materia();
             return lista_materia;
         }
 }

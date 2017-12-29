@@ -10,6 +10,7 @@ package Include;
  * @author Victor
  */
 public class Profesores {
+    private Integer Id_Profesor;
     private String NomProfesor;
     private String ApeProfesor;
     private String Telefono;
@@ -20,6 +21,7 @@ public class Profesores {
     private String Contraseña;
     private String Nivel;
     private String Estado;
+    private Integer Id_Grado;
             
      public Profesores(String NomProfesor, String ApeProfesor, String Telefono, String Domicilio,
             String Dui, String Nip, String Usuario, String Contraseña, String Nivel, String Estado){
@@ -33,7 +35,29 @@ public class Profesores {
     this.Contraseña = Contraseña;
     this.Nivel = Nivel;
     this.Estado = Estado;
+    this.Id_Grado = Id_Grado;
     }
+
+    public Integer getId_Profesor() {
+        return Id_Profesor;
+    }
+
+    public void setId_Profesor(Integer Id_Profesor) {
+        this.Id_Profesor = Id_Profesor;
+    }
+    public Integer getId_Grado() {
+        return Id_Grado;
+    }
+
+    public void setId_Grado(Integer Id_Grado) {
+        this.Id_Grado = Id_Grado;
+    }
+
+ 
+      public Profesores(){
+       
+         
+     }
      public Profesores(String usuario, String contraseña){
          this.Usuario = usuario;
          this.Contraseña = contraseña;

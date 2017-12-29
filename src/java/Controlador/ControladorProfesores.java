@@ -14,9 +14,13 @@ import Modelo.ModeloProfesores;
  * @author Victor
  */
 public class ControladorProfesores {
+       ModeloProfesores mp = new ModeloProfesores();
       public boolean insertar(Profesores p){
-        ModeloProfesores mp = new ModeloProfesores();
+  
         return mp.insertarprofesores(p);
 }
+        public Profesores getProfesor(int id_profesor){
+        return mp.obtener_profesor_por_id(id_profesor);
+    }
     
 }

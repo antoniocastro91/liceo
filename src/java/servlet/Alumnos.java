@@ -5,22 +5,24 @@
  */
 package servlet;
 
-
-import Controlador.ControladorProfesores;
-
-import Include.Profesores;
+import Controlador.ControladorAlumno;
+import Include.Alumno;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Victor
+ * @author Antonio Castro
  */
-public class InsertarProfesores extends HttpServlet {
+@WebServlet(name = "Alumnos", urlPatterns = {"/Alumnos"})
+public class Alumnos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,34 +36,36 @@ public class InsertarProfesores extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-          
-             String Nombre = request.getParameter("Nombre");
-             String Apellido = request.getParameter("Apellido");
-             String Telefono = request.getParameter("Telefono");
-             String Domicilio = request.getParameter("Domicilio");
-             String Dui = request.getParameter("Dui");
-             String Nip = request.getParameter("Nip");
-             String Usuario = request.getParameter("Usuario");
-             String Contraseña = request.getParameter("Contrasena");
-             String Nivel = request.getParameter("Nivel");
-             String Estado = request.getParameter("Estado");
-            
-             Profesores  profes = new Profesores( Nombre, Apellido, Telefono, Domicilio, Dui, Nip, Usuario, Contraseña, Nivel, Estado);
-             Controlador.ControladorProfesores cp = new ControladorProfesores();
-              
-              if(cp.insertar(profes)){
-                     response.getWriter().print("1");
-              }else{
-                  response.getWriter().print("0");
-              }
-        }catch(Exception e){
-            System.out.println("Hubo error");
+        String opcion = "";
+        opcion = request.getParameter("opcion");
+        int seccion = Integer.parseInt(request.getParameter("seccion"));
+        switch(opcion){
+            case "listar":{
+                ControladorAlumno controlador_alumno = new ControladorAlumno();
+                List<Alumno> lista_alumnos = new ArrayList<>();
+                lista_alumnos = controlador_alumno.listar_alumnos_por_seccion(seccion);
+                try (PrintWriter out = response.getWriter()) {
+                    for(int i= 0; i<lista_alumnos.size();i++){
+                        out.println("<tr>");
+                            out.print("<td>");
+                                out.print(lista_alumnos.get(i).getNie());
+                            out.print("</td>");
+                            out.print("<td>");
+                                out.print(lista_alumnos.get(i).getNombre() + " " + lista_alumnos.get(i).getApellido());
+                            out.print("</td>");
+                            out.print("<td><input type=\"text\" /></td>");
+                            out.print("<td><input type=\"text\" /></td>");
+                            out.print("<td><input type=\"text\" /></td>");
+                            out.print("<td><input type=\"text\" /></td>");
+                            out.print("<td></td>");
+                        out.println("</tr>");
+                    }
+                }
+                break;
+            }
         }
-            
-        }
-    
+        
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

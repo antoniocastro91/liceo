@@ -5,22 +5,22 @@
  */
 package servlet;
 
-
-import Controlador.ControladorProfesores;
-
-import Include.Profesores;
+import Controlador.ControladorMeses;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Victor
+ * @author Antonio Castro
  */
-public class InsertarProfesores extends HttpServlet {
+@WebServlet(name = "Meses", urlPatterns = {"/Meses"})
+public class Meses extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,34 +34,18 @@ public class InsertarProfesores extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        int id_trimestre = Integer.parseInt(request.getParameter("trimestre"));
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-          
-             String Nombre = request.getParameter("Nombre");
-             String Apellido = request.getParameter("Apellido");
-             String Telefono = request.getParameter("Telefono");
-             String Domicilio = request.getParameter("Domicilio");
-             String Dui = request.getParameter("Dui");
-             String Nip = request.getParameter("Nip");
-             String Usuario = request.getParameter("Usuario");
-             String Contraseña = request.getParameter("Contrasena");
-             String Nivel = request.getParameter("Nivel");
-             String Estado = request.getParameter("Estado");
-            
-             Profesores  profes = new Profesores( Nombre, Apellido, Telefono, Domicilio, Dui, Nip, Usuario, Contraseña, Nivel, Estado);
-             Controlador.ControladorProfesores cp = new ControladorProfesores();
-              
-              if(cp.insertar(profes)){
-                     response.getWriter().print("1");
-              }else{
-                  response.getWriter().print("0");
-              }
-        }catch(Exception e){
-            System.out.println("Hubo error");
+                    ControladorMeses controlador_meses = new ControladorMeses();
+                    List<Include.Meses> lista_meses = lista_meses = controlador_meses.listar_meses_por_trimestre(id_trimestre);
+                    for(int i=0;i<lista_meses.size();i++){
+                        out.print("<option value='"+ lista_meses.get(i).getId_mes() +"'>");
+                            out.print(lista_meses.get(i).getMes());
+                        out.print("</option>");
+                    }
+
         }
-            
-        }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

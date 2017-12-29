@@ -6,33 +6,31 @@
 package Modelo;
 
 import Controlador.Conexion;
-import Include.Materia;
+import Include.Meses;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 /**
  *
  * @author Antonio Castro
  */
-public class ModeloMateria extends Conexion{
-    
-    private Conexion c = new Conexion();
+public class ModeloMeses {
+private Conexion c = new Conexion();
     public String error = "";
     
-     public boolean insertarmaterias(Materia m){
+     public boolean insertarmes(Meses m){
         boolean flag = false;
          PreparedStatement pst = null;
         try{
-            String sql="insert into materias(materia) values (?)";
-            pst = getConnection().prepareStatement(sql);
-            pst.setString(1, m.getMateria());
-            
-              if(pst.executeUpdate() == 1){
+            String sql="insert into meses (id_trimestre, mes) values (?, ?)";
+            pst = this.c.getConnection().prepareStatement(sql);
+            pst.setInt(1, m.getId_trimestre());
+            pst.setString(2, m.getMes());
+            if(pst.executeUpdate() == 1){
             flag = true;
              }
         
@@ -40,7 +38,7 @@ public class ModeloMateria extends Conexion{
              System.err.println(e.getMessage());
         }finally{
             try {
-                if(getConnection()!= null) getConnection().close();
+                if(this.c.getConnection()!= null) this.c.getConnection().close();
                 if(pst != null) pst.close();
             } catch (Exception e) {
                 System.err.println(e.getMessage());
@@ -48,23 +46,24 @@ public class ModeloMateria extends Conexion{
         }
     return flag;
         }
-     public List<Materia> listar_Materia() {
-        List<Materia> lista_materia = new ArrayList<>();
+    
+    
+      public List<Meses> listar_meses_por_trimestre(int id_trimestre) {
+        List<Meses> lista_meses = new ArrayList<>();
         try {
             Statement statement = this.c.getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("select Materia from materias");
+            ResultSet rs = statement.executeQuery("select * from meses where id_trimestre = " + id_trimestre);
             while (rs.next()) {
-                Materia materia = new Materia();
-                materia.setMateria(rs.getString("Materia"));
-                lista_materia.add(materia);
+                Meses mes = new Meses();
+                mes.setId_mes(rs.getInt("id_mes"));
+                mes.setId_trimestre(rs.getInt("id_trimestre"));        
+                mes.setMes(rs.getString("mes"));        
+                lista_meses.add(mes);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return lista_materia;
+        return lista_meses;
     }
-    
-     
-   
 }

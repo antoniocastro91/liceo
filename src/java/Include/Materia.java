@@ -10,42 +10,37 @@ package Include;
  * @author Antonio Castro
  */
 public class Materia {
-    private Integer idmateria;
-    private String materia;
+    private Integer Id_Materia;
+    private String Materia;
 
 public Materia(){
        
     }
-    public Materia(Integer idmateria,String materia){
-        this.idmateria = idmateria;
-        this.materia = materia;
-    }
-
-    public Integer getIdmateria() {
-        return idmateria;
-    }
-
-    public void setIdmateria(Integer idmateria) {
-        this.idmateria = idmateria;
-    }
-
     public Materia(String materia){
-        this.materia = materia;
+        
+        this.Materia = materia;
+    }
+    public Materia(Integer idmateria,String materia){
+        this.Id_Materia = idmateria;
+        this.Materia = materia;
     }
 
-    /**
-     * @return the materia
-     */
+    public Integer getId_Materia() {
+        return Id_Materia;
+    }
+
+    public void setId_Materia(Integer Id_Materia) {
+        this.Id_Materia = Id_Materia;
+    }
+
     public String getMateria() {
-        return materia;
+        return Materia;
     }
 
-    /**
-     * @param materia the materia to set
-     */
-    public void setMateria(String materia) {
-        this.materia = materia;
+    public void setMateria(String Materia) {
+        this.Materia = Materia;
     }
-
+    
+    
 }
 

@@ -20,7 +20,7 @@
            <header class="main-bar">
                <center>
                     <a href="header.jsp">
-                        <img align="center" class="img-responsive img-rounded"  src="resources/img/backgrounds/2.jpg"/>
+                        <img align="center" class="img-responsive img-rounded"  src="resources/img/imagen_barra.png"/>
                      </a> 
                </center>
            </header>
@@ -57,6 +57,8 @@
           </ul>
         </li>
           <li><a href="Calificaciones.jsp">Notas</a></li>
+          <li><a href="Asignaciones.jsp">Asignaciones</a></li>
+          <li><a href="RegistrarMatricula.jsp">Registrar Matricula</a></li>
           <li><a href="Notas.jsp">Acerca de</a></li>
           <li><a href="Notas.jsp">Reportes</a></li>
           <li><a href="index.jsp"> Cerrar Sesion</a>

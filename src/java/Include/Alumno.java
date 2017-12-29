@@ -37,7 +37,9 @@ public class Alumno {
     }
     public Alumno(){
     }
-
+    public Alumno(String nombre){
+    this.nombre = nombre;
+    }
     /**
      * @return the nombre
      */
