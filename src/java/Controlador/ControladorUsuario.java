@@ -5,8 +5,9 @@
  */
 package Controlador;
 
-import Include.Profesores;
-import Modelo.ModeloUsuario;
+import Include.Profesores.Profesores;
+import Include.Usuario.Usuario;
+import Modelo.Usuarios.ModeloUsuario;
 
 /**
  *
@@ -14,10 +15,16 @@ import Modelo.ModeloUsuario;
  */
 public class ControladorUsuario {
         public String error;
-        public boolean validar(Profesores p){
+        public boolean validar(Usuario u){
             ModeloUsuario mu = new ModeloUsuario();
-            boolean autenticado = mu.autentication(p);
+            boolean autenticado = mu.autentication(u);
             error = mu.error;
             return autenticado;
     }
+        
+        public String getViewUser(Usuario u){
+            String htmlcode = "";
+            htmlcode += "<b> <p> Bienvenido " + u.getUsuario() + "</b></p>" +"<a href='CerrarSesion'> Cerrar Sesion</a> ";
+        return htmlcode;
+    } 
 }

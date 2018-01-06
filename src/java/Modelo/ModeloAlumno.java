@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ModeloAlumno  extends Conexion{
     
-        private Conexion c = new Conexion();
+    private Conexion c = new Conexion();
     public String error = "";
     public boolean insertaralumno(Alumno a){
     boolean flag = false;

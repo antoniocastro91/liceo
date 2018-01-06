@@ -5,8 +5,8 @@
  */
 package Controlador;
 
-import Include.Direccion;
-import Modelo.ModeloDireccion;
+import Include.Direccion.Direccion;
+import Modelo.Direccion.ModeloDireccion;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +17,7 @@ import java.util.List;
 public class ControladorDireccion {
     ModeloDireccion md = new ModeloDireccion();
     public String error = "";
+
     public boolean insertar(Direccion d){
         ModeloDireccion md = new ModeloDireccion();
         return md.insertardirector(d);
@@ -42,5 +43,9 @@ public class ControladorDireccion {
     public Direccion getDireccion(int id_direccion){
         return md.obtener_direccion_por_id(id_direccion);
     }
-    
+         public String getViewUser(Direccion d){
+         String htmlcode = "";
+         htmlcode += "<b> <p> Bienvenido " + d.getUsuario() + "</b></p>" +"<a href='CerrarSesion'> Cerrar Sesion</a> ";
+        return htmlcode;
+    } 
 }

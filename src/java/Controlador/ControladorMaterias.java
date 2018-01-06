@@ -5,9 +5,9 @@
  */
 package Controlador;
 
-import Include.Direccion;
-import Include.Materia;
-import Modelo.ModeloMateria;
+import Include.Direccion.Direccion;
+import Include.Materias.Materia;
+import Modelo.Materia.ModeloMateria;
 import java.util.ArrayList;
 import java.util.List;
 

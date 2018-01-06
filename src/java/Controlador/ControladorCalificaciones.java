@@ -5,8 +5,8 @@
  */
 package Controlador;
 
-import Include.Calificaciones;
-import Modelo.ModeloCalificaciones;
+import Include.Calificaciones.Calificaciones;
+import Modelo.Calificaciones.ModeloCalificaciones;
 
 /**
  *

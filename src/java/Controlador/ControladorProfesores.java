@@ -5,9 +5,9 @@
  */
 package Controlador;
 
-import Include.Profesores;
+import Include.Profesores.Profesores;
 
-import Modelo.ModeloProfesores;
+import Modelo.Profesores.ModeloProfesores;
 
 /**
  *
@@ -22,5 +22,9 @@ public class ControladorProfesores {
         public Profesores getProfesor(int id_profesor){
         return mp.obtener_profesor_por_id(id_profesor);
     }
-    
+     public String getViewUser(Profesores p){
+         String htmlcode = "";
+         htmlcode += "<b> <p> Bienvenido " + p.getUsuario() + "</b></p>" +"<a href='CerrarSesion'> Cerrar Sesion</a> ";
+        return htmlcode;
+    } 
 }

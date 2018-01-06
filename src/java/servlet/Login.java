@@ -7,7 +7,8 @@ package servlet;
 
 import Controlador.Conexion;
 import Controlador.ControladorUsuario;
-import Include.Profesores;
+import Include.Profesores.Profesores;
+import Include.Usuario.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -38,27 +39,27 @@ public class Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-              String usuario = request.getParameter("usuario");
+            String usuario = request.getParameter("usuario");
             String contraseña = request.getParameter("clave");
-            Profesores p = new Profesores(usuario, contraseña);
+            Usuario u = new Usuario(usuario, contraseña);
             ControladorUsuario cu = new ControladorUsuario();
             Conexion co = new Conexion();
-             if(cu.validar(p)){
+             if(cu.validar(u)){
                 HttpSession sesion = request.getSession(true);
                 switch(co.loguear(usuario, contraseña))
                 {
                     case 1:
+                           response.getWriter().print("1");
                            sesion.setAttribute("usuario", usuario); 
                            sesion.setAttribute("nivel", 1);
-
                     break;
 
                     case 2:
+                            response.getWriter().print("2");
                             sesion.setAttribute("usuario", usuario);
                             sesion.setAttribute("nivel",2);
-
                }
-                response.getWriter().print("ok");
+              
            }else {
                response.getWriter().print("error " + cu.error);
            }

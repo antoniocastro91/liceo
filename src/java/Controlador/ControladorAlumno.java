@@ -5,7 +5,7 @@
  */
 package Controlador;
 import Include.Alumno;
-import Include.Materia;
+import Include.Materias.Materia;
 import Modelo.ModeloAlumno;
 import java.util.ArrayList;
 import java.util.List;
