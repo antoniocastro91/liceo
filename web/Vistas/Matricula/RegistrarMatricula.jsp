@@ -38,10 +38,9 @@
                                  </div>
                             </div>  
                          <div class="form-group col-md-6">
-                                              
                                      <label for="name" class=" control-label">Seleccione el Grado</label>
-                                                 <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                                         <select id="Grado" name="Grado" class="form-control">
                                              <option <% if(gs.getIdGradoSeccion()== 1){ %> selected <% }%> value="1">Primero A</option>
                                              <option <% if(gs.getIdGradoSeccion()== 2){ %> selected <% }%> value="2"> Primero B</option>

@@ -6,6 +6,7 @@
 package Controlador;
 
 
+import Include.Usuario.Usuario;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,19 +19,21 @@ import java.sql.SQLException;
  */
 public class Conexion {
     private String USERNAME = "root";
-    private String Password = "root";
-    private String host = "localhost";
+    private String PASSWORD = "root";
+    private String HOST = "localhost";   
+    //private String PASSWORD="IYSlgx85981";
+    //private String HOST = "node1970-sistemmuna.j.sphere48.com";
     private String Port = "3306";
     private String Databases = "liceojcdp";
     private String classname = "com.mysql.jdbc.Driver";
-    private String Url = "jdbc:mysql://"+host + ":"+ Port+"/"+Databases;
+    private String Url = "jdbc:mysql://"+HOST + ":"+ Port+"/"+Databases;
     private Connection con;
     
     
     public Conexion() {
         try {
             Class.forName(classname);
-            con = DriverManager.getConnection(Url, USERNAME, Password);
+            con = DriverManager.getConnection(Url, USERNAME, PASSWORD);
         } catch (ClassNotFoundException e) {
             System.err.print("error"+ e);
         } catch(SQLException e){
@@ -50,25 +53,28 @@ public class Conexion {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public int loguear(String usuario, String clave){
+    public Usuario loguear(String usuario, String clave){
         Connection co;
         java.sql.PreparedStatement pst;
         ResultSet rs;
-        int a =0;   
-        String sql ="select u.Id_Rol from usuarios u, rol r where ((u.Usuario='"+usuario+"' and u.Contraseña='"+clave+"' and u.Estado = 1 and u.Estado = r.Estado))";  
+        Usuario u = new Usuario();
+        String sql ="select distinct u.Id_Usuario, u.Id_Rol, u.Usuario, u.id_personal from usuarios u, rol r where u.Usuario='" + usuario +"' and u.Contraseña=MD5('" + clave + "') and u.Estado = 1 and u.Estado = r.Estado";  
         try {
             Class.forName(this.classname);
             co=DriverManager.getConnection(
-            this.Url,this.USERNAME, this.Password);
+            this.Url,this.USERNAME, this.PASSWORD);
             pst = co.prepareStatement(sql);
             rs = pst.executeQuery();
             while(rs.next())
             {
-                a = rs.getInt(1);
+                u.setId_Usuario(rs.getInt(1));
+                u.setId_Rol(rs.getInt(2));
+                u.setUsuario(rs.getString(3));
+                u.setId_Personal(rs.getInt(4));
             }
             co.close();
         } catch (ClassNotFoundException | SQLException e){}
-    return a;
+    return u;
     }
     
 }

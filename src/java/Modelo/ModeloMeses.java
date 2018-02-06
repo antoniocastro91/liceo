@@ -66,4 +66,22 @@ private Conexion c = new Conexion();
 
         return lista_meses;
     }
+      public List<Meses> listar_meses() {
+        List<Meses> lista_meses = new ArrayList<>();
+        try {
+            Statement statement = this.c.getConnection().createStatement();
+            ResultSet rs = statement.executeQuery("select * from meses");
+            while (rs.next()) {
+                Meses mes = new Meses();
+                mes.setId_mes(rs.getInt("id_mes"));
+                mes.setId_trimestre(rs.getInt("id_trimestre"));        
+                mes.setMes(rs.getString("mes"));        
+                lista_meses.add(mes);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista_meses;
+    }
 }

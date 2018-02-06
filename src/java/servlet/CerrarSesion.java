@@ -5,6 +5,8 @@
  */
 package servlet;
 
+import Controlador.ControladorUsuario;
+import Include.Usuario.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -34,11 +36,23 @@ public class CerrarSesion extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-        HttpSession sesion = request.getSession(true);
-        sesion.removeValue("usuario");
-        response.sendRedirect("/Vistas/Principal/index.jsp");
+       ControladorUsuario cu = new ControladorUsuario();
+       Usuario u = new Usuario();
+       HttpSession sesion = request.getSession(true);
+
+       if(sesion == request.getSession(true)){
+                sesion.removeValue(sesion.getAttribute("usuario").toString() + u.getId_Usuario());
+                sesion.invalidate(); 
+                response.sendRedirect("/liceo/Vistas/Principal/index.jsp");
+            }
+        
+        
         }
+        
+        
+            
+      
+     
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

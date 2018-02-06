@@ -13,22 +13,35 @@ public class Usuario {
     private Integer Id_Usuario;
     private String Usuario;
     private String Contraseña;
-    private Integer Estado;
-    private Integer Id_Rol;
+    private Integer Estado = 1;
+    private Integer Id_Rol=1 ;    
+    private Integer Id_Personal;
+    private String NomUsuario;
 
+    public String getNomUsuario() {
+        return NomUsuario;
+    }
+
+    public void setNomUsuario(String NomUsuario) {
+        this.NomUsuario = NomUsuario;
+    }
+
+    
     public Usuario(){}
-    public Usuario(Integer id_usuario, String usuario, String contraseña, Integer estado, Integer id_rol){
+    public Usuario(Integer id_usuario, String usuario, String contraseña, Integer estado, Integer id_rol, Integer id_personal){
             this.Id_Usuario = id_usuario;
             this.Usuario = usuario;
             this.Contraseña = contraseña;
             this.Estado = estado;
             this.Id_Rol = id_rol;
+            this.Id_Personal = id_personal;
     }
-    public Usuario( String usuario, String contraseña, Integer estado, Integer id_rol){
+    public Usuario( String usuario, String contraseña, Integer estado, Integer id_rol,Integer id_personal){
            this.Usuario = usuario;
            this.Contraseña = contraseña;
            this.Estado = estado;
            this.Id_Rol = id_rol;
+           this.Id_Personal = id_personal;
     }
     public Usuario(String usuario, String contraseña){
             this.Usuario = usuario;
@@ -36,6 +49,14 @@ public class Usuario {
     }
     public Usuario(String usuario){
             this.Usuario = usuario;
+    }
+    
+    public Integer getId_Personal() {
+        return Id_Personal;
+    }
+
+    public void setId_Personal(Integer Id_Personal) {
+        this.Id_Personal = Id_Personal;
     }
     
     public Integer getId_Usuario() {

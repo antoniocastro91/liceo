@@ -30,4 +30,10 @@ public class ControladorMeses {
             lista_meses = this.mm.listar_meses_por_trimestre(id_trimestre);
             return lista_meses;
         }
+         
+         public List<Meses> listar_meses(){
+            List<Meses> lista_meses= new ArrayList<>();
+            lista_meses = this.mm.listar_meses();
+            return lista_meses; 
+         }
 }

@@ -81,7 +81,7 @@ public class ModeloAlumno  extends Conexion{
         List<Alumno> lista_alumno_primergr = new ArrayList<>();
         try {
             Statement statement = this.c.getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("Select  a.NIE, a.Nombre, a.Apellido  from Alumnos a, Grados g where g.Id_Grado = a.Id_Grado and a.Id_Grado= " + id_seccion + ";");
+            ResultSet rs = statement.executeQuery("Select  a.NIE, a.Nombre, a.Apellido  from Alumnos a, Grados g join g.Id_Grado = a.Id_Grado where a.Id_Grado= " + id_seccion + ";");
             while (rs.next()) {
                 Alumno alumno = new Alumno();
                 alumno.setNie(rs.getInt("NIE"));

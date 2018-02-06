@@ -47,16 +47,19 @@ public class Matricula extends HttpServlet {
                     for(int i= 0; i<lista_matriculas.size();i++){
                         out.println("<tr>");
                             out.print("<td>");
-                                out.print(lista_matriculas.get(i).getNIE());
+                            out.print(lista_matriculas.get(i).getNIE());
                             out.print("</td>");
                             out.print("<td>");
-                                out.print(lista_matriculas.get(i).getNombres()+ " " + lista_matriculas.get(i).getPrimer_Apellido() + lista_matriculas.get(i).getSegundo_Apellido());
+                            out.print(lista_matriculas.get(i).getNombres()+ " " + lista_matriculas.get(i).getPrimer_Apellido() + lista_matriculas.get(i).getSegundo_Apellido());
                             out.print("</td>");
-                            out.print("<td><input type=\"text\" onkeyup='promedio(this)'/></td>");
-                            out.print("<td><input type=\"text\" onkeyup='promedio(this)'/></td>");
-                            out.print("<td><input type=\"text\" onkeyup='promedio(this)'/></td>");
-                            out.print("<td><input type=\"text\" /></td>");
-                            out.print("<td></td>");
+                            out.print("<td align='center'><input style=' border-radius: 10px;border: 1px solid #000000; padding: 0 4px 0 4px;' type=\"text\" onkeyup='promedio(this)'/></td>");
+                            out.print("<td align='center'><input style=' border-radius: 10px;border: 1px solid #000000;' type=\"text\" onkeyup='promedio(this)'/></td>");
+                            out.print("<td align='center'><input style=' border-radius: 10px;border: 1px solid #000000;' type=\"text\" onkeyup='promedio(this)'/></td>");
+                            out.print("<td align='center'><input readonly style=' border-radius: 10px;border: 1px solid #000000;' type=\"text\" /></td>");
+                            out.print("<td ></td>");
+                            out.print("<td class='hidden'>");
+                            out.print(lista_matriculas.get(i).getId_Matricula());
+                            out.print("</td>");
                         out.println("</tr>");
                     }
                 }

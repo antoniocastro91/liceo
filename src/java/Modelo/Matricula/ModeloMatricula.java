@@ -124,11 +124,12 @@ public class ModeloMatricula extends Conexion {
         List<Matricula> lista_alumno_primergr = new ArrayList<>();
         try {
             Statement statement = this.c.getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("Select  m.NIE, m.Nombres, m.Primer_Apellido ,m.Segundo_Apellido  \n" +
-"from matricula m join gradoseccion gs on m.idGradoSeccion = gs.IdGradoSeccion\n" +
-"where m.idGradoSeccion = " + id_seccion);
+            ResultSet rs = statement.executeQuery("Select m.Id_Matricula, m.NIE, m.Nombres, m.Primer_Apellido ,m.Segundo_Apellido  \n" +
+                                                  "from matricula m join gradoseccion gs on m.idGradoSeccion = gs.IdGradoSeccion\n" +
+                                                  "where m.idGradoSeccion = " + id_seccion );
             while (rs.next()) {
                 Matricula matricula = new Matricula();
+                matricula.setId_Matricula(rs.getInt("Id_Matricula"));
                 matricula.setNIE(rs.getString("NIE"));
                 matricula.setNombres(rs.getString("Nombres"));
                 matricula.setPrimer_Apellido(rs.getString("Primer_Apellido"));

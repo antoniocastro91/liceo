@@ -52,9 +52,10 @@ public class ModeloMateria extends Conexion{
         List<Materia> lista_materia = new ArrayList<>();
         try {
             Statement statement = this.c.getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("select Materia from materias");
+            ResultSet rs = statement.executeQuery("select Id_Materia, Materia from materias");
             while (rs.next()) {
                 Materia materia = new Materia();
+                materia.setId_Materia(rs.getInt("Id_Materia"));
                 materia.setMateria(rs.getString("Materia"));
                 lista_materia.add(materia);
             }

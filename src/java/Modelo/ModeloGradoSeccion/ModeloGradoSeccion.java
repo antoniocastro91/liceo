@@ -25,7 +25,7 @@ public class ModeloGradoSeccion extends Conexion {
         List<GradoSeccion> lista_gradoseccion = new ArrayList<>();
         try {
             Statement statement = this.c.getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("select gs.IdGradoSeccion, gs.IdGrado, gs.IdSeccion, concat(g.Grado, \" \", s.seccion) as grado_seccion from gradoseccion gs join grados g on g.Id_Grado = gs.IdGrado join seccion s on s.Id_Seccion = gs.IdSeccion;");
+            ResultSet rs = statement.executeQuery("select gs.IdGradoSeccion, gs.IdGrado, gs.IdSeccion, concat(g.Grado, \" \", s.seccion) as grado_seccion from gradoseccion gs join grados g on g.Id_Grado = gs.IdGrado join seccion s on s.Id_Seccion = gs.IdSeccion order by gs.IdGradoSeccion");
             while (rs.next()) {
                 GradoSeccion gradoseccion = new GradoSeccion();
                 gradoseccion.setIdGradoSeccion(rs.getInt("IdGradoSeccion"));

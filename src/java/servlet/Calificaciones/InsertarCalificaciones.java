@@ -10,14 +10,22 @@ import Include.Calificaciones.Calificaciones;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
+
 
 /**
  *
  * @author Victor
  */
+@WebServlet(name = "InsertarCalificaciones", urlPatterns = {"/InsertarCalificaciones"})
 public class InsertarCalificaciones extends HttpServlet {
 
     /**
@@ -35,31 +43,45 @@ public class InsertarCalificaciones extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
           
-            Double Nota1 = Double.parseDouble(request.getParameter("Nota1"));
-            Double Nota2 = Double.parseDouble(request.getParameter("Nota2"));
-            Double Nota3 = Double.parseDouble(request.getParameter("Nota3"));
-            Double Promedio = Double.parseDouble(request.getParameter("Promedio"));
-            Integer Id_Alumno = Integer.parseInt(request.getParameter("Id_Alumno"));
-            Integer Id_Grado = Integer.parseInt(request.getParameter("Id_Grado"));
-            Integer Id_Materia = Integer.parseInt(request.getParameter("Id_Materia"));
-            Integer Id_Trimestre = Integer.parseInt(request.getParameter("Id_Trimestre"));
-            Integer Id_Profesor = Integer.parseInt(request.getParameter("Id_Profesor"));
-            
-            Calificaciones cali = new Calificaciones(Nota1, Nota2, Nota3, Promedio, Id_Alumno, Id_Grado,
-                    Id_Materia, Id_Trimestre, Id_Profesor);
-            
-            Controlador.ControladorCalificaciones  cc = new ControladorCalificaciones();
-               
-            if(cc.insertar(cali)){
-                     response.getWriter().print("1");
-              }else{
-                  response.getWriter().print("0");
-              }
+            boolean result = false;
+            String error = "";
+            HttpSession sesion = request.getSession(true);
+            String calif = request.getParameter("calificaciones");
+            JSONArray jobj =(JSONArray) JSONValue.parse(calif);
+            for(int i=0;i<jobj.size(); i++){
+                JSONObject calificacion = (JSONObject)JSONValue.parse(jobj.get(i).toString());
+                Double Nota1 = Double.parseDouble(calificacion.get("nota1").toString());
+                Double Nota2 = Double.parseDouble(calificacion.get("nota2").toString());
+                Double Nota3 = Double.parseDouble(calificacion.get("nota3").toString());
+                Double Promedio = calcular(Nota1, Nota2, Nota3);
+                Integer Id_Matricula = Integer.parseInt(calificacion.get("id_matricula").toString());
+                Integer Id_Grado = Integer.parseInt(calificacion.get("grado_seccion").toString());
+                Integer Id_Materia = Integer.parseInt(calificacion.get("id_materia").toString());
+                Integer Id_Mes = Integer.parseInt(calificacion.get("id_mes").toString());
+                String Año = calificacion.get("anio").toString();
+
+                Integer Id_Personal = Integer.parseInt(sesion.getAttribute("id_personal").toString());
+
+                Calificaciones cali = new Calificaciones(Nota1, Nota2, Nota3, Promedio, Id_Matricula, Id_Grado,
+                        Id_Materia, Id_Mes, Id_Personal, Año);
+
+                Controlador.ControladorCalificaciones  cc = new ControladorCalificaciones();
+                result = cc.insertar(cali);
+            }
+
+            if(result){
+                out.print("1");
+            }else{
+                out.print("0");
+            }
         }catch(Exception e){
-            System.out.println("Hubo error");
-        } 
+            System.out.println(e.getMessage());
         }
-    
+        
+    }
+    private Double calcular(Double Nota1,Double Nota2,Double Nota3){
+       return  (Nota1*0.2 + Nota2*0.3 + Nota3*0.5);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

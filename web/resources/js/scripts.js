@@ -23,9 +23,17 @@ $(function()
             var data =  $("#frm-login").serialize();
             $.post('Login', data, function(res, est, jqXHR){
                 if(res === '1'){
-                     window.location = "/liceo/Vistas/Principal/Principal.jsp";   
-                }if(res === '2' ){
-                    window.location = "/liceo/Vistas/Principal/Menu_Usuario.jsp";   
+                     
+                    alert("Bienvenido admin, presione aceptar para ser redireccionado al MenuPirncipal");
+                     setTimeout(function(){
+                        window.location = "Vistas/Principal/Principal.jsp";    
+                    },100);
+                     
+               }else if(res === '2'){
+                   
+                      alert("Bienvenido usuario,presione aceptar para ser redireccionado al MenuPirncipal")
+                      window.location = "Vistas/Principal/Principal.jsp";    
+                    
                 }else{
                     alert("Credenciales invalidas");
                 }

@@ -14,23 +14,74 @@ public class Calificaciones {
     private double Nota2;
     private double Nota3;
     private double Promedio;
-    private Integer Id_Alumno;
+    private Integer Id_Matricula;
     private Integer Id_Grado;
     private Integer Id_Materia;
-    private Integer Id_Trimestre;
-    private Integer Id_Profesor;
+    private Integer Id_Mes;
+    private Integer Id_Personal;
+    private String Anio;
+    private String Nombre;
+    private String Materia;
+    private String NIE;
+    private String Mes;
+    
+
+    public String getMes() {
+        return Mes;
+    }
+
+    public void setMes(String Mes) {
+        this.Mes = Mes;
+    }
+
+    public String getNIE() {
+        return NIE;
+    }
+
+    public void setNIE(String NIE) {
+        this.NIE = NIE;
+    }
+
+    public String getMateria() {
+        return Materia;
+    }
+
+    public void setMateria(String Materia) {
+        this.Materia = Materia;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.Nombre = nombre;
+    }
 
     public Calificaciones(double Nota1, double Nota2, double Nota3, double Promedio,
-            Integer Id_Alumno, Integer Id_Grado, Integer Id_Materia, Integer Id_Trimestre, Integer Id_Profesor){
+            Integer Id_Matricula, Integer Id_Grado, Integer Id_Materia, Integer Id_Trimestre, Integer Id_Personal, String año){
         this.Nota1 = Nota1;
         this.Nota2 = Nota2;
         this.Nota3 = Nota3;
         this.Promedio = Promedio;
-        this.Id_Alumno = Id_Alumno;
+        this.Id_Matricula = Id_Matricula;
         this.Id_Grado = Id_Grado;
         this.Id_Materia = Id_Materia;
-        this.Id_Trimestre = Id_Trimestre;
-        this.Id_Profesor = Id_Profesor; 
+        this.Id_Mes = Id_Trimestre;
+        this.Id_Personal = Id_Personal; 
+        this.Anio = año; 
+    }
+    
+    public Calificaciones(){
+        
+    }
+    
+    public String getAnio() {
+        return Anio;
+    }
+
+    public void setAnio(String Anio) {
+        this.Anio = Anio;
     }
     
     public double getNota1() {
@@ -65,12 +116,12 @@ public class Calificaciones {
         this.Promedio = Promedio;
     }
 
-    public Integer getId_Alumno() {
-        return Id_Alumno;
+    public Integer getId_Matricula() {
+        return Id_Matricula;
     }
 
-    public void setId_Alumno(Integer Id_Alumno) {
-        this.Id_Alumno = Id_Alumno;
+    public void setId_Matricula(Integer Id_Matricula) {
+        this.Id_Matricula = Id_Matricula;
     }
 
     public Integer getId_Grado() {
@@ -89,20 +140,20 @@ public class Calificaciones {
         this.Id_Materia = Id_Materia;
     }
 
-    public Integer getId_Trimestre() {
-        return Id_Trimestre;
+    public Integer getId_Mes() {
+        return Id_Mes;
     }
 
-    public void setId_Trimestre(Integer Id_Trimestre) {
-        this.Id_Trimestre = Id_Trimestre;
+    public void setId_Mes(Integer Id_Mes) {
+        this.Id_Mes = Id_Mes;
     }
 
-    public Integer getId_Profesor() {
-        return Id_Profesor;
+    public Integer getId_Personal() {
+        return Id_Personal;
     }
 
-    public void setId_Profesor(Integer Id_Profesor) {
-        this.Id_Profesor = Id_Profesor;
+    public void setId_Personal(Integer Id_Personal) {
+        this.Id_Personal = Id_Personal;
     }
     
     

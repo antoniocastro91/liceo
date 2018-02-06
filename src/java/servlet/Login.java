@@ -1,4 +1,4 @@
-/*
+                                                             /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -7,7 +7,6 @@ package servlet;
 
 import Controlador.Conexion;
 import Controlador.ControladorUsuario;
-import Include.Profesores.Profesores;
 import Include.Usuario.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,20 +45,13 @@ public class Login extends HttpServlet {
             Conexion co = new Conexion();
              if(cu.validar(u)){
                 HttpSession sesion = request.getSession(true);
-                switch(co.loguear(usuario, contraseña))
-                {
-                    case 1:
-                           response.getWriter().print("1");
-                           sesion.setAttribute("usuario", usuario); 
-                           sesion.setAttribute("nivel", 1);
-                    break;
-
-                    case 2:
-                            response.getWriter().print("2");
-                            sesion.setAttribute("usuario", usuario);
-                            sesion.setAttribute("nivel",2);
-               }
-              
+                u = co.loguear(usuario, contraseña);
+                if(u != null){
+                    response.getWriter().print(u.getId_Rol());
+                    sesion.setAttribute("usuario", u.getUsuario()); 
+                    sesion.setAttribute("nivel", u.getId_Rol());
+                    sesion.setAttribute("id_personal", u.getId_Personal());
+                }
            }else {
                response.getWriter().print("error " + cu.error);
            }
