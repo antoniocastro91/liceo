@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package servlet.Pagos;
 
-import Controlador.ControladorUsuario;
-import Include.Usuario.Usuario;
+import Controlador.ControladorPago;
+import Include.IncludePagos;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Antonio Castro
  */
-@WebServlet(name = "CerrarSesion", urlPatterns = {"/CerrarSesion"})
-public class CerrarSesion extends HttpServlet {
+@WebServlet(name = "ModificarPagos", urlPatterns = {"/ModificarPagos"})
+public class ModificarPagos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,20 +35,25 @@ public class CerrarSesion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-       ControladorUsuario cu = new ControladorUsuario();
-       Usuario u = new Usuario();
-       HttpSession sesion = request.getSession(true);
-         if(sesion == request.getSession(true)){
-                sesion.removeValue(sesion.getAttribute("usuario").toString() + u.getId_Usuario());
-                //request.getSession().invalidate();
-                sesion.invalidate(); 
-                response.sendRedirect("/liceo/Vistas/Principal/index.jsp");
+          
+            ControladorPago cp = new ControladorPago();
+            IncludePagos p = new IncludePagos();
+            String id = request.getParameter("id");
+            Integer id_matricula = Integer.parseInt(request.getParameter("f_alumno"));
+            Integer estado = Integer.parseInt(request.getParameter("estado"));
+            p.setId_Alummo(id_matricula);
+            p.setEstado(estado);
+            p.setIdPago(Integer.parseInt(id));
+            if(cp.actualizar(p)){
+                    out.print("ok");
+            }else{
+                out.println("error");
             }
          }
-       }
-   
+    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

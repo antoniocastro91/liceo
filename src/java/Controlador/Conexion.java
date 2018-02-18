@@ -21,8 +21,8 @@ public class Conexion {
     private String USERNAME = "root";
     private String PASSWORD = "root";
     private String HOST = "localhost";   
-    //private String PASSWORD="IYSlgx85981";
-    //private String HOST = "node1970-sistemmuna.j.sphere48.com";
+    //private String PASSWORD="METakl64231";
+    //private String HOST = "https://node72251-sistema.whelastic.net";
     private String Port = "3306";
     private String Databases = "liceojcdp";
     private String classname = "com.mysql.jdbc.Driver";

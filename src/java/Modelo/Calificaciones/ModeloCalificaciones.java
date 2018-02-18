@@ -64,12 +64,13 @@ public class ModeloCalificaciones extends Conexion{
                         "from  calificaciones c " +
                         "join matricula m on c.Id_Matricula = m.Id_Matricula " +
                         "join meses me on c.Id_Mes = me.Id_Mes " +
+                        "join cancelaciones ca on ca.Id_Matricula = c.Id_Matricula "+
                         "join materias ma on ma.Id_Materia = c.Id_Materia" +
                         " where m.NIE = ? ";
             if(!id_meses.equals("0")){
                 sql += "and c.Id_Mes in (?,?,?)";
             }
-             sql += "and c.anio= ? order by c.id_mes asc";
+             sql += "and c.anio= ? and ca.Estado = 1 order by c.id_mes asc";
             
             PreparedStatement pst = this.c.getConnection().prepareStatement(sql);
             

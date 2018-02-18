@@ -45,7 +45,6 @@ public class InsertarUsuarios extends HttpServlet {
               ControladorUsuario cu = new ControladorUsuario();
               if(cu.insertar(usuarios)){
                      response.getWriter().print("1");
-                    
               }else{
                   response.getWriter().print("0");
                   out.print(cu.error);
@@ -53,7 +52,7 @@ public class InsertarUsuarios extends HttpServlet {
         }catch(Exception e){
             System.out.println("Hubo error");
         }
-        }
+    }
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

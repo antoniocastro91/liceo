@@ -36,15 +36,17 @@ public class LoginPadres extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String nie = request.getParameter("nie");
+            String usuario = request.getParameter("usuario");
+            String contraseña = request.getParameter("clave");
             
-            ConsultaNotas cn = new ConsultaNotas(nie);
+            IncludePadres cn = new IncludePadres(usuario,contraseña);
             ControladorNotas cnotas = new ControladorNotas();
             Conexion co = new Conexion();
              if(cnotas.validar(cn)){
-                   HttpSession sesion = request.getSession(true);
-                    sesion.setAttribute("nie", cn.getNIE()); 
-                   if(cn.getNIE()!= null){
+                    HttpSession sesion = request.getSession(true);
+                    sesion.setAttribute("usuario", cn.getUsuario()); 
+                    sesion.setAttribute("clave", cn.getClave()); 
+                   if(cn != null){
                        response.getWriter().print("ok");
                     }else{
                         response.getWriter().print("error");

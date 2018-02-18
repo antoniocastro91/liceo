@@ -4,9 +4,12 @@
 <%@page import="java.util.List"%>
 <%@page import="Controlador.ControladorCalificaciones"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="../PadresFamilia/header.jsp"/>
+<jsp:include page="../Principal/header.jsp"/>
 <% 
-     
+    HttpSession sesion = request.getSession(false);
+    //String usuario = sesion.getAttribute("usuario") == null ? "" : sesion.getAttribute("usuario").toString();
+    //String url = response.encodeRedirectURL(request.getContextPath() + "/liceo/Vistas/Principal/index.jsp");
+  
 ControladorCalificaciones c = new ControladorCalificaciones();
 List<Calificaciones> lista_Calificaciones = null;
 if(request.getParameter("nie") != null){
@@ -80,7 +83,7 @@ meses[2] = "8,9,10";
           </fieldset>
         </div>  
     </div>  
-</div> <br/>
+</div> 
 <div class ="container">
     <div class="row" align="center">
         <div class="col-xs-12 text-center">

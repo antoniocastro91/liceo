@@ -50,4 +50,9 @@ public class ControladorMatricula {
         lista_matriculas = this.ma.listar_Alumno_por_seccion(id_seccion);
         return lista_matriculas;
     }
+    public List<Matricula> listar_Matricula_por_grado(int id_seccion){
+        List<Matricula> lista_matriculass = new ArrayList<>();
+        lista_matriculass = this.ma.listar_alumno_por_seccion(id_seccion);
+        return lista_matriculass;
+    }
 }

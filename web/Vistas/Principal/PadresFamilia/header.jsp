@@ -1,17 +1,6 @@
 <%@page import="Controlador.ControladorUsuario"%>
 <%@page import="Include.Usuario.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    HttpSession sesion = request.getSession(true);
-    Object usu = sesion.getAttribute("usuario") == null ? null : sesion.getAttribute("usuario");
-    Usuario usuario = null;
-    ControladorUsuario cu = null;
-    if(usu != null){
-        cu = new ControladorUsuario();
-        usuario = new Usuario(usu.toString());
-        usuario.setId_Rol(Integer.parseInt(session.getAttribute("nivel").toString()));
-    }
-%>
 <%@page session="true" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -43,7 +32,7 @@
            <header class="main-bar">
                <center>
                     <a href="Vistas/Principal/PadresFamilia/header.jsp">
-                        <img align="center" class="img-responsive img-rounded"  src="resources/img/bannemenueva.jpg"/>
+                        <img align="center" class="img-responsive img-rounded"  src="resources/img/header.jpg"/>
                      </a> 
                </center>
            </header>

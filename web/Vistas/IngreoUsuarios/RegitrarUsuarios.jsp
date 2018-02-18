@@ -1,14 +1,22 @@
-<%-- 
-    Document   : RegitrarUsuarios
-    Created on : 06-ene-2018, 17:39:52
-    Author     : Antonio Castro
---%>
 <%@page import="java.util.List"%>
 <%@page import="Controlador.ControladorPersonal"%>
 <%@page import="Include.Personal.Personal"%>
 <%@page import="Controlador.ControladorUsuario"%>
 <%@page import="Include.Usuario.Usuario"%>
 <%
+     HttpSession sesion = request.getSession(true);
+    String usu = sesion.getAttribute("usuario") == null ? "" : sesion.getAttribute("usuario").toString();
+    String url = response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/index.jsp");
+    if(usu == ""){
+        response.sendRedirect(url);
+        return;
+    }
+    Object nivel = sesion.getAttribute("nivel") == null ? null : sesion.getAttribute("nivel");
+    if (Integer.parseInt(nivel.toString()) != 1){
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/Principal.jsp"));
+    }
+    ControladorUsuario controladorUsuario = new ControladorUsuario();
+    controladorUsuario.setId_usuario(Integer.parseInt(session.getAttribute("id_personal").toString()));
     ControladorUsuario cu = new ControladorUsuario();
     Usuario usuario = new Usuario();
     Personal p = new Personal();

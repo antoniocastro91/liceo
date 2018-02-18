@@ -17,7 +17,7 @@ $(function()
                 if(res == "ok"){
                   alert("Bienvenido padre de familia, presione aceptar para ser redireccionado al MenuPirncipal");
                      setTimeout(function(){
-                        window.location = "Vistas/Principal/PadresFamilia/Notas.jsp";    
+                        window.location = "Vistas/Principal/PadresFamilia/Principal.jsp";    
                     },100);
                      
                 }else{

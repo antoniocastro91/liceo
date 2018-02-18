@@ -6,6 +6,7 @@
 package servlet;
 
 import Controlador.ControladorAlumno;
+import Controlador.Matricula.ControladorMatricula;
 import Include.Alumno;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,36 +37,18 @@ public class Alumnos extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String opcion = "";
-        opcion = request.getParameter("opcion");
-        int seccion = Integer.parseInt(request.getParameter("seccion"));
-        switch(opcion){
-            case "listar":{
-                ControladorAlumno controlador_alumno = new ControladorAlumno();
-                List<Alumno> lista_alumnos = new ArrayList<>();
-                lista_alumnos = controlador_alumno.listar_alumnos_por_seccion(seccion);
-                try (PrintWriter out = response.getWriter()) {
-                    for(int i= 0; i<lista_alumnos.size();i++){
-                        out.println("<tr>");
-                            out.print("<td>");
-                                out.print(lista_alumnos.get(i).getNie());
-                            out.print("</td>");
-                            out.print("<td>");
-                                out.print(lista_alumnos.get(i).getNombre() + " " + lista_alumnos.get(i).getApellido());
-                            out.print("</td>");
-                            out.print("<td><input type=\"text\" /></td>");
-                            out.print("<td><input type=\"text\" /></td>");
-                            out.print("<td><input type=\"text\" /></td>");
-                            out.print("<td><input type=\"text\" /></td>");
-                            out.print("<td></td>");
-                        out.println("</tr>");
+        int id_grado = Integer.parseInt(request.getParameter("grados"));
+        try (PrintWriter out = response.getWriter()) {
+                    ControladorMatricula controlador_meses = new ControladorMatricula();
+                    List<Include.Matricula.Matricula > lista_meses = lista_meses = controlador_meses.listar_Matricula_por_grado(id_grado);
+                    for(int i=0;i<lista_meses.size();i++){
+                        out.print("<option value='"+ lista_meses.get(i).getId_Matricula()+"'>");
+                            out.print(lista_meses.get(i).getNombres());
+                        out.print("</option>");
                     }
-                }
-                break;
-            }
         }
-        
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

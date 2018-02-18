@@ -16,15 +16,15 @@ import java.sql.ResultSet;
 public class ModeloNotas extends Conexion {
     private Conexion c = new Conexion();
         public String error = "";
-    public boolean autentication(ConsultaNotas cn){
+   public boolean autentication(IncludePadres cn){
         PreparedStatement pst = null;
         ResultSet rs = null;
         
         try {
-            String consulta = " select nie from matricula where NIE= ?";
+            String consulta = "select u.Usuario, u.Clave  from usuariospadres u where u.Usuario = ? and u.Clave=MD5(?)";
             pst = getConnection().prepareStatement(consulta);
-            pst.setString(1, cn.getNIE());
-         
+            pst.setString(1, cn.getUsuario());
+            pst.setString(2, cn.getClave());
             rs = pst.executeQuery();
             
             if(rs.absolute(1)){
@@ -48,6 +48,29 @@ public class ModeloNotas extends Conexion {
                 
         return false;
 }
-    
+     public boolean insertarusuario(IncludePadres ip){
+    boolean flag = false;
+     PreparedStatement pst = null;
+     try{
+            String sql="INSERT INTO `liceojcdp`.`usuariospadres` (`Usuario`, `Clave`) values (?,Md5(?))";
+            pst = getConnection().prepareStatement(sql);
+            pst.setString(1, ip.getUsuario());
+            pst.setString(2, ip.getClave());
+        if(pst.executeUpdate() == 1){
+              flag = true;
+             }
+        }catch (Exception e) {
+             System.err.println(e.getMessage());
+             
+        }finally{
+            try {
+                if(getConnection()!= null) getConnection().close();
+                if(pst != null) pst.close();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        }
+    return flag;
+        }
     
 }

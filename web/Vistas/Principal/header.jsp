@@ -1,6 +1,7 @@
 <%@page import="Controlador.ControladorUsuario"%>
 <%@page import="Include.Usuario.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true" %>
 <%
     HttpSession sesion = request.getSession(true);
     String usuario = sesion.getAttribute("usuario") == null ? "" : sesion.getAttribute("usuario").toString();   
@@ -10,10 +11,9 @@
     if(usuario != ""){
         cu = new ControladorUsuario();
         user = new Usuario(usuario.toString());
-        user.setId_Rol(Integer.parseInt(session.getAttribute("id_rol").toString()));
+        user.setId_Rol(Integer.parseInt(session.getAttribute("nivel").toString()));
     }
-%>
-<%@page session="true" %>
+%> 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
@@ -22,7 +22,7 @@
     <c:set var="req" value="${pageContext.request}" />
 	<c:set var="uri" value="${req.requestURI}" />
 	<c:set var="url">${req.requestURL}</c:set>
-	<base href="http://localhost:26683/liceo/" />
+	<base href="http://localhost:26683/liceo/" /> 
 	<!-- <base href="http://sistemmuna.j.sphere48.com/liceojcdp/" /> -->
       <%-- <link rel="stylesheet" href="resources/css/style2.css" type="text/css" media="all">--%>
         <!-- Bootstrap -->
@@ -45,7 +45,7 @@
            <header class="main-bar">
                <center>
                     <a href="Vistas/Principal/Principal.jsp">
-                        <img align="center" class="img-responsive img-rounded"  src="resources/img/bannemenueva.jpg"/>
+                        <img align="center" class="img-responsive img-rounded"  src="resources/img/header.jpg"/>
                      </a> 
                </center>
            </header>
@@ -74,17 +74,21 @@
         <li class="dropdown">
             <a href="Vistas/Principal/Principal.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-lock"> Administracion </i><span class="caret"></span></a>
           <ul class="dropdown-menu">
-                   <li role="separator" class="divider"></li>
-                   <li><i class="glyphicon glyphicon-book"> Materias</i>
+                 <li><i class="glyphicon glyphicon-book"> Materias</i>
                         <a href="Vistas/Materias/Materias.jsp">Registrar</a>
-                        <a href="Vistas/Materias/ListaMateria.jsp">Mostrar</a>
+                        <a href="Vistas/Materias/ListaMaterias.jsp">Consultar</a>
                     </li>
                  <li role="separator" class="divider"></li>
-                <li><i class="glyphicon glyphicon-pushpin"> Grados </i>
-                      <a href="Vistas/Grado/Grado.jsp">Registrar</a>
-                      <a href="Vistas/Grado/ListaGrado.jsp">Mostrar</a>
-                </li>
-             </ul>
+                    <li><i class="glyphicon glyphicon-pushpin"> Grados </i>
+                        <a href="Vistas/Grado/Grado.jsp">Registrar</a>
+                        <a href="Vistas/Grado/ListaGrado.jsp">Consultar</a>
+                     </li>
+                <li role="separator" class="divider"></li>
+                  <li><i class="glyphicon glyphicon-btc"> Pagos </i>
+                        <a href="Vistas/Pagos/AdministracionPagos.jsp">Registrar</a>
+                        <a href="Vistas/Pagos/ListaPagos.jsp">Consultar</a>
+                  </li>
+            </ul>
           </li>
         <li><a href="Vistas/Matricula/Asignaciones.jsp"><i class="glyphicon glyphicon-pencil"> Asignaciones </i></a></li>
        
@@ -107,22 +111,28 @@
            </ul>
         </li>
  
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="Vistas/Matricula/RegistrarMatricula.jsp"> <i class="glyphicon glyphicon-list-alt"> RegistrarMatricula </i></a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" > <i class="glyphicon glyphicon-list-alt"> RegistrarMatricula </i><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="Vistas/Matricula/RegistrarMatricula.jsp">Registrar</a></li>
+              <li><a href="Vistas/Matricula/ListaMatricula.jsp">Consultar</a></li>
+          </ul>
+
+        </li>
         <li><a href="Notas.jsp" ><i class="glyphicon glyphicon-calendar"> Reportes</i></a>
         </li>
                                <% } 
                }%>
-               <li class="dropdown">
+          <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-list-alt"> Notas </i><span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li>
-                    
                     <a href="Vistas/Calificaciones/Calificaciones.jsp">Registrar</a>
-                    <a href="Vistas/Personal/ListaDireccion.jsp">Mostrar</a>
+                    <a href="Vistas/Calificaciones/Notas.jsp">Mostrar</a>
                 </li>
            </ul>
         </li>
-               <li><a href="Vistas/Principal/index.jsp"><i class="glyphicon glyphicon-off"> CerrarSesion</i></a></li>
+               <li><a href="CerrarSesion"><i class="glyphicon glyphicon-off"> CerrarSesion</i></a></li>
              
       </ul>
              <ul class="nav navbar-nav navbar-right pull-right">

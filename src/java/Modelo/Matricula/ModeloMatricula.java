@@ -142,6 +142,29 @@ public class ModeloMatricula extends Conexion {
 
         return lista_alumno_primergr;
     }
+      public List<Matricula> listar_alumno_por_seccion(int id_seccion) {
+        List<Matricula> lista_alumno = new ArrayList<>();
+        PreparedStatement pst = null;
+        try {
+            String sql ="Select m.Id_Matricula,concat( m.Nombres, \" \", m.Primer_Apellido, \" \",m.Segundo_Apellido ) as Nombre "+
+                         "from matricula m join gradoseccion gs on m.idGradoSeccion = gs.IdGradoSeccion "+
+                         "where m.idGradoSeccion = " + id_seccion;
+            
+            pst = getConnection().prepareStatement(sql);
+            pst.executeQuery();
+            ResultSet rs = pst.getResultSet();
+            while (rs.next()) {
+                Matricula matricula = new Matricula();
+                matricula.setId_Matricula(rs.getInt("Id_Matricula"));
+                matricula.setNombres(rs.getString("Nombre"));
+                lista_alumno.add(matricula);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista_alumno;
+    }
       
       
      public Matricula obtener_matricula_por_id(int id_matricula){

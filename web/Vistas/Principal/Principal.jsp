@@ -1,11 +1,16 @@
+<%@page import="Controlador.ControladorUsuario"%>
 <%
-    HttpSession sesion = request.getSession(false);
+    
+    HttpSession sesion = request.getSession(true);
     String usuario = sesion.getAttribute("usuario") == null ? "" : sesion.getAttribute("usuario").toString();
-    String url = response.encodeRedirectURL(request.getContextPath() + "/liceo/Vistas/Principal/index.jsp");
+    String url = response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/index.jsp");
     if(usuario == ""){
         response.sendRedirect(url);
         return;
-    }    
+    }
+ 
+    ControladorUsuario controladorUsuario = new ControladorUsuario();
+    controladorUsuario.setId_usuario(Integer.parseInt(session.getAttribute("id_personal").toString()));
 %>
 <jsp:include page="../Principal/header.jsp"/>
    
@@ -15,13 +20,17 @@
 		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                      <li data-target="#carousel-example-generic" data-slide-to="0" ></li>
                       <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                      <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                      <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                      <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                      <li data-target="#carousel-example-generic" data-slide-to="5" class="active"></li>
                     </ol>
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
-                      <div class="item active">
+                      <div class="item">
                           <img class="img-responsive img-rounded" src="resources/img/backgrounds/Pijamada2.jpg" alt="Responsive image">
                         <div class="carousel-caption">
                           ...
@@ -47,6 +56,12 @@
                       </div>
                       <div class="item">
                           <img class="img-responsive img-rounded" src="resources/img/backgrounds/IMG-20171010-WA0019.jpg" alt="Responsive image">
+                        <div class="carousel-caption">
+                          ...
+                        </div>
+                      </div>
+                      <div class="item active">
+                          <img class="img-responsive img-rounded" src="resources/img/backgrounds/personal.jpg" alt="Responsive image">
                         <div class="carousel-caption">
                           ...
                         </div>

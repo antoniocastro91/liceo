@@ -1,21 +1,35 @@
+<%@page import="Controlador.ControladorUsuario"%>
 <%@page import="Include.Matricula.Matricula"%>
 <%@page import="java.util.List"%>
 <%@page import="Controlador.Matricula.ControladorMatricula"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="../Principal/header.jsp"/>
 <% 
+         HttpSession sesion = request.getSession(true);
+    String usu = sesion.getAttribute("usuario") == null ? "" : sesion.getAttribute("usuario").toString();
+    String url = response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/index.jsp");
+    if(usu == ""){
+        response.sendRedirect(url);
+        return;
+    }
+    Object nivel = sesion.getAttribute("nivel") == null ? null : sesion.getAttribute("nivel");
+    if (Integer.parseInt(nivel.toString()) != 1){
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/Principal.jsp"));
+    }  
+    ControladorUsuario controladorUsuario = new ControladorUsuario();
+    controladorUsuario.setId_usuario(Integer.parseInt(session.getAttribute("id_personal").toString()));
     ControladorMatricula controladormatri = new ControladorMatricula();
     List<Matricula> lista_Matrcula = controladormatri.listar();
 %>
 <div class ="container">
     <div class="row">
         <div class="col-xs-12">
-            <center>
+
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Año </th>
-                        <th>IdGradoSeccion</th>
+                        <th>GradoSeccion</th>
                         <th>Primer Apellido</th>
                         <th>Segundo Apellido</th>
                         <th>Nombre</th>
@@ -23,9 +37,8 @@
                         <th>Edad</th>
                         <th>Sexo</th>
                         <th>Municipio</th>
-                        <th>Departamento</th>
                         <th>RepiteGrado</th>
-                        <th>Documentos Presentados</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,9 +72,7 @@
                           <td><%=lista_Matrcula.get(i).getEdad()%></td>
                           <td><%=lista_Matrcula.get(i).getSexo()%></td>
                           <td><%=lista_Matrcula.get(i).getMunicipio()%></td>
-                          <td><%=lista_Matrcula.get(i).getDepartamento()%></td>
                           <td><%=lista_Matrcula.get(i).getRepite_Grado()%></td>
-                          <td><%=lista_Matrcula.get(i).getDocumentos_Presentados()%></td>
                           
                          <td>
                             <a class="btn btn-warning btn-xs" href="Vistas/Matricula/ModificarMatricula.jsp?id_matricula=<%= lista_Matrcula.get(i).getId_Matricula()%>"><i class="glyphicon glyphicon-pencil"></i></a>
@@ -94,3 +105,4 @@
                             }
                         }
                     </script>
+<jsp:include page="../Principal/footer.jsp"/>                

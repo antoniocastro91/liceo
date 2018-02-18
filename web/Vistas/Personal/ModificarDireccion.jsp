@@ -1,16 +1,30 @@
+<%@page import="Controlador.ControladorUsuario"%>
 <%@page import="Include.Area"%>
 <%@page import="java.util.List"%>
 <%@page import="Controlador.ControladorArea"%>
 <%@page import="Include.Personal.Personal"%>
 <%@page import="Controlador.ControladorPersonal"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% 
+<%  
+    HttpSession sesion = request.getSession(true);
+    String usu = sesion.getAttribute("usuario") == null ? "" : sesion.getAttribute("usuario").toString();
+    String url = response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/index.jsp");
+    if(usu == ""){
+        response.sendRedirect(url);
+        return;
+    }
+    Object nivel = sesion.getAttribute("nivel") == null ? null : sesion.getAttribute("nivel");
+    if (Integer.parseInt(nivel.toString()) != 1){
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/Principal.jsp"));
+    }  
+    ControladorUsuario controladorUsuario = new ControladorUsuario();
+    controladorUsuario.setId_usuario(Integer.parseInt(session.getAttribute("id_personal").toString()));
 
     Controlador.ControladorPersonal controladorDire = new ControladorPersonal();
     Personal dire = new Personal();
     dire = controladorDire.getDireccion(Integer.parseInt(request.getParameter("id_personal").toString()));
-      Controlador.ControladorArea ca = new ControladorArea();
-     List<Area> lista_area = ca.listar_area();
+    Controlador.ControladorArea ca = new ControladorArea();
+    List<Area> lista_area = ca.listar_area();
 %>
 <jsp:include page="../Principal/header.jsp"/>
         <div class="container">
@@ -71,13 +85,13 @@
                                  <div class="form-group col-md-6">
                                        <label for="name" class="cols-sm-3 control-label">Area</label>
                                           <div class="input-group">
-                                                      <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                     <select id="Id_area" name="Id_area" required="" class="form-control">
+                                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                <select id="Id_area" name="Id_area" required="" class="form-control">
                                                     <option selected > Seleccione el area</option>
                                                          <% for(int i=0; i < lista_area.size(); i++ ){ %>
                                                          <option value="<%=lista_area.get(i).getId_area()%> "><%= lista_area.get(i).getArea()%></option>
                                                        <% } %>
-                                                    </select>
+                                                </select>
                                            </div>
                                   </div>
                              </div>

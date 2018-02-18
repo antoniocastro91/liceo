@@ -1,12 +1,3 @@
-<%
-    HttpSession sesion = request.getSession(false);
-    String usuario = sesion.getAttribute("usuario") == null ? "" : sesion.getAttribute("usuario").toString();
-    String url = response.encodeRedirectURL(request.getContextPath() + "/liceo/Vistas/Principal/index.jsp");
-    if(usuario == ""){
-        response.sendRedirect(url);
-        return;
-    }    
-%>
 <jsp:include page="/Vistas/Principal/PadresFamilia/header.jsp"/>
    
   <div class="container">

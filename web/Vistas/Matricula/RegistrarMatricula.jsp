@@ -1,3 +1,4 @@
+<%@page import="Controlador.ControladorUsuario"%>
 <%@page import="Controlador.GradoSeccion.ControladorGradoSeccion"%>
 <%@page import="Include.GradoSeccion.GradoSeccion"%>
 <%@page import="Controlador.ControladorGrado"%>
@@ -9,6 +10,19 @@
 <%@page import="Include.Seccion.Seccion"%>
 <jsp:include page="../Principal/header.jsp"/>
 <%
+         HttpSession sesion = request.getSession(true);
+    String usu = sesion.getAttribute("usuario") == null ? "" : sesion.getAttribute("usuario").toString();
+    String url = response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/index.jsp");
+    if(usu == ""){
+        response.sendRedirect(url);
+        return;
+    }
+    Object nivel = sesion.getAttribute("nivel") == null ? null : sesion.getAttribute("nivel");
+    if (Integer.parseInt(nivel.toString()) != 1){
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/Principal.jsp"));
+    }  
+    ControladorUsuario controladorUsuario = new ControladorUsuario();
+    controladorUsuario.setId_usuario(Integer.parseInt(session.getAttribute("id_personal").toString()));
   Conexion con = new Conexion();
   GradoSeccion gs = new GradoSeccion();
   Grado  g = new Grado();   

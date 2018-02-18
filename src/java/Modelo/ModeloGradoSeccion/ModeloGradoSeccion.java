@@ -7,6 +7,7 @@ package Modelo.ModeloGradoSeccion;
 
 import Controlador.Conexion;
 import Include.GradoSeccion.GradoSeccion;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -57,5 +58,52 @@ public class ModeloGradoSeccion extends Conexion {
 
         return lista_id;
     }
+    public GradoSeccion obtener_grado_por_id(int id_grado){
+     GradoSeccion grado = new GradoSeccion();
+     PreparedStatement pst = null;
+        try {
+            String sql="select distinct g.Grado as NombreGrado gs.* from gradoseccion gs \n" +
+                        "join grados g on gs.IdGrado = g.Id_Grado \n" +
+                        "join seccion s on s.Id_Seccion = gs.IdSeccion \n" +
+                        "where gs.IdGradoSeccion = ?";
+            pst = getConnection().prepareStatement(sql);
+            pst.setInt(1, id_grado);
+            pst.executeQuery();
+            ResultSet rs = pst.getResultSet();
+            while (rs.next()) {
+                grado.setIdGradoSeccion(rs.getInt("IdGradoSeccion"));
+                grado.setGrado_seccion(rs.getString("NombreGrado"));
+               
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return grado;      
+    }
+    public GradoSeccion obtener_seccion_por_id(int id_seccion){
+     GradoSeccion seccion = new GradoSeccion();
+     PreparedStatement pst = null;
+        try {
+            String sql="select distinct s.Seccion as NombreSeccion gs.* from gradoseccion gs \n" +
+                        "join grados g on gs.IdGrado = g.Id_Grado \n" +
+                        "join seccion s on s.Id_Seccion = gs.IdSeccion \n" +
+                        "where gs.IdGradoSeccion = ?";
+            pst = getConnection().prepareStatement(sql);
+            pst.setInt(1, id_seccion);
+            pst.executeQuery();
+            ResultSet rs = pst.getResultSet();
+            while (rs.next()) {
+                seccion.setIdGradoSeccion(rs.getInt("IdGradoSeccion"));
+                seccion.setGrado_seccion(rs.getString("NombreSeccion"));
+               
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return seccion;      
+    }
+     
  
 }

@@ -65,7 +65,27 @@ public class ModeloMateria extends Conexion{
 
         return lista_materia;
     }
-    
+         public Materia obtener_materia_por_id(int id_materia){
+     Materia materia = new  Materia();
+     PreparedStatement pst = null;
+        try {
+            String sql="select * from materias where Id_Materia = ?";
+            pst = getConnection().prepareStatement(sql);
+            pst.setInt(1, id_materia);
+            pst.executeQuery();
+            ResultSet rs = pst.getResultSet();
+            while (rs.next()) {
+                 materia.setId_Materia(rs.getInt("Id_Materia"));
+                materia.setMateria(rs.getString("Materia"));
+         
+      
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return materia;      
+    }
      
    
 }

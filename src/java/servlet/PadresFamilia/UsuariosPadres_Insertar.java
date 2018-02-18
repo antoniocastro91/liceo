@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package servlet.PadresFamilia;
 
-import Controlador.ControladorUsuario;
-import Include.Usuario.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,14 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Antonio Castro
  */
-@WebServlet(name = "CerrarSesion", urlPatterns = {"/CerrarSesion"})
-public class CerrarSesion extends HttpServlet {
+@WebServlet(name = "UsuariosPadres_Insertar", urlPatterns = {"/UsuariosPadres_Insertar"})
+public class UsuariosPadres_Insertar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,18 +33,21 @@ public class CerrarSesion extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-       ControladorUsuario cu = new ControladorUsuario();
-       Usuario u = new Usuario();
-       HttpSession sesion = request.getSession(true);
-         if(sesion == request.getSession(true)){
-                sesion.removeValue(sesion.getAttribute("usuario").toString() + u.getId_Usuario());
-                //request.getSession().invalidate();
-                sesion.invalidate(); 
-                response.sendRedirect("/liceo/Vistas/Principal/index.jsp");
-            }
-         }
-       }
-   
+            /* TODO output your page here. You may use following sample code. */
+             String usuario = request.getParameter("usuario");
+             String clave= request.getParameter("clave");
+             IncludePadres cn = new IncludePadres(usuario,clave);
+             ControladorNotas cnotas = new ControladorNotas();
+            if(cnotas.insertar(cn)){
+                     response.getWriter().print("1");
+              }else{
+                  response.getWriter().print("0");
+                     out.print(cnotas.error);
+              }
+        }catch(Exception e){
+            System.out.println("Hubo error");
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -5,13 +5,26 @@
 <%@page import="Controlador.ControladorUsuario"%>
 <%@page import="Include.Usuario.Usuario"%>
 <%
+     HttpSession sesion = request.getSession(true);
+    String usu = sesion.getAttribute("usuario") == null ? "" : sesion.getAttribute("usuario").toString();
+    String url = response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/index.jsp");
+    if(usu == ""){
+        response.sendRedirect(url);
+        return;
+    }
+    Object nivel = sesion.getAttribute("nivel") == null ? null : sesion.getAttribute("nivel");
+    if (Integer.parseInt(nivel.toString()) != 1){
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/Principal.jsp"));
+    }
+    ControladorUsuario controladorUsuario = new ControladorUsuario();
+    controladorUsuario.setId_usuario(Integer.parseInt(session.getAttribute("id_personal").toString()));
     ControladorUsuario cu = new ControladorUsuario();
     Usuario usuario = new Usuario();
     Personal p = new Personal();
     ControladorPersonal cp = new ControladorPersonal();
     List<Personal> lista_personal = cp.listar();
     
-       usuario = cu.getUsuario(Integer.parseInt(request.getParameter("id_usuario").toString()));
+    usuario = cu.getUsuario(Integer.parseInt(request.getParameter("id_usuario").toString()));
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="../Principal/header.jsp"/>

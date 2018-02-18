@@ -1,13 +1,12 @@
 <%@page import="Controlador.ControladorUsuario"%>
+<%@page import="Controlador.ControladorMaterias"%>
+<%@page import="Include.Materias.Materia"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Include.Area"%>
-<%@page import="Controlador.ControladorArea"%>
-<%@page import="Controlador.ControladorPersonal"%>
-<%@page import="Include.Personal.Personal"%>
+
 
 <% 
-     HttpSession sesion = request.getSession(true);
+         HttpSession sesion = request.getSession(true);
     String usu = sesion.getAttribute("usuario") == null ? "" : sesion.getAttribute("usuario").toString();
     String url = response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/index.jsp");
     if(usu == ""){
@@ -20,8 +19,8 @@
     }  
     ControladorUsuario controladorUsuario = new ControladorUsuario();
     controladorUsuario.setId_usuario(Integer.parseInt(session.getAttribute("id_personal").toString()));
-    Controlador.ControladorPersonal controladorpersonal = new ControladorPersonal();
-    List<Personal> lista_Direcion = controladorpersonal.listar();
+    Controlador.ControladorMaterias controladorpersonal = new ControladorMaterias();
+    List<Materia> lista_materia = controladorpersonal.listar_materias();
 %>
 <jsp:include page="../Principal/header.jsp"/>
  
@@ -32,36 +31,23 @@
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        <th>Nombre </th>
-                        <th>Apellido</th>
-                        <th>DUI</th>
-                        <th>Telefono</th>
-                        <th>Domicilio</th>
-                        <th>Area</th>
+                        <th>IdMateria</th>
+                        <th>Materia</th>
                         <th>Opciones</th>
                                     
                     </tr>
                 </thead>
                 <tbody>
                     <%
-                        for(int i = 0; i < lista_Direcion.size(); i++){
+                        for(int i = 0; i < lista_materia.size(); i++){
                     %>
-                    <tr class="<%= lista_Direcion.get(i).getId_area()!= 1 ? "warning":"success" %> ">
-                        <td><%=lista_Direcion.get(i).getNombre()%></td>
-                        <td><%=lista_Direcion.get(i).getApellido()%></td>
-                        <td><%=lista_Direcion.get(i).getDui()%></td>
-                        <td><%=lista_Direcion.get(i).getTelefono()%></td>
-                        <td><%=lista_Direcion.get(i).getDomicilio()%></td>
-                        <td><% if(lista_Direcion.get(i).getId_area() == 1){%>
-                             <label>Maestro</label>
-                            <% }else {%>
-                            <label>Administrador</label>
-                            <% }%>
-                        </td>
+                    <tr >
+                        <td><%=lista_materia.get(i).getId_Materia()%></td>
+                        <td><%=lista_materia.get(i).getMateria()%></td>
                      
                           <td>
-                            <a class="btn btn-warning btn-xs" href="Vistas/Personal/ModificarDireccion.jsp?id_personal=<%= lista_Direcion.get(i).getId_Personal()%>"><i class="glyphicon glyphicon-pencil"></i></a>
-                            <button class="btn btn-danger btn-xs" onclick="eliminar_direccion(<%= lista_Direcion.get(i).getId_Personal()%>)"><i class="glyphicon glyphicon-trash"></i></button>
+                            <a class="btn btn-warning btn-xs" href="Vistas/Materias/ModificarMateria.jsp?id_materia=<%= lista_materia.get(i).getId_Materia()%>"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <button class="btn btn-danger btn-xs" onclick="eliminar_direccion(<%= lista_materia.get(i).getId_Materia()%>)"><i class="glyphicon glyphicon-trash"></i></button>
                         </td> 
                     </tr>
                     <%        

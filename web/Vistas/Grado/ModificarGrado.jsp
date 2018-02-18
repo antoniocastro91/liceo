@@ -1,42 +1,38 @@
-<%@page import="Include.Grado"%>
+<%@page import="Controlador.GradoSeccion.ControladorGradoSeccion"%>
+<%@page import="Include.GradoSeccion.GradoSeccion"%>
+<%@page import="Include.Grado.Grado"%>
+<%@page import="Controlador.ControladorGrado"%>
 <%@page import="Controlador.ControladorGrado"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
 
     Controlador.ControladorGrado controladorGrado = new ControladorGrado();
+    ControladorGradoSeccion controladorGradoSeccion = new ControladorGradoSeccion();
     Grado grado = new Grado();
-    grado = controladorGrado.getGrado(Integer.parseInt(request.getParameter("id_grado").toString()));
+    GradoSeccion gs = new GradoSeccion();
+    //gs = controladorGradoSeccion.getGrado(Integer.parseInt(request.getParameter("id_grado").toString()));
+    //gs = controladorGradoSeccion.getSeccion(Integer.parseInt(request.getParameter("id_Seccion").toString()));
 
 %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-         <link rel="stylesheet" href="resources/boostrap/bootstrap.min.css">
-       <link rel="stylesheet" href="resources/css/grados.css">
-        
-    </head>
-    <body>
-         
+<jsp:include page="../Principal/header.jsp"/>         
             <div class="row main">
                 <div class="main-login main-center">
                     <form class="" method="post" id="frm-grado" action="grado_Modificar">
                          <h3 align="center">Formulario para la edicion de Grados.</h3>
-                         <input type="hidden" name="id" id="id" value="<%= grado.getId_Grado()%>"/>
+                         <input type="hidden" name="id" id="id" value="<%= gs.getIdGradoSeccion()%>"/>
                          <div class="row">
                            <div class="form-group col-md-6">
                                      <label for="name" class="cols-sm-3 control-label">Nombre del Grado</label>
                                         <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                    <input type="text" id="grado" name="grado"  value="<%= grado.getGrado()%>" class="form-control" placeholder="Ingrese el Grado"/>
+                                                    <input type="text" id="grado" name="grado"  value="<%= gs.getGrado_seccion()%>" class="form-control" placeholder="Ingrese el Grado"/>
                                          </div>
                             </div>
                             <div class="form-group col-md-6">
                                      <label for="name" class=" control-label">Seccion</label>
                                         <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                    <input type="text"  id="seccion" name="seccion" value="<%= grado.getSeccion()%>" class="form-control" placeholder="Ingrese la Seccion"/>
+                                                    <input type="text"  id="seccion" name="seccion" value="<%= grado.getGrado()%>" class="form-control" placeholder="Ingrese la Seccion"/>
                                          </div>
                              </div>
                          </div>
@@ -72,7 +68,4 @@
                                              
                                              
                                          </script>
-     
-        
-    </body>
-</html>
+<jsp:include page="../Principal/footer.jsp"/>    

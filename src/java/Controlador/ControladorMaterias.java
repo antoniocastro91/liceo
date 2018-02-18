@@ -28,4 +28,7 @@ public class ControladorMaterias {
             lista_materia = this.mm.listar_Materia();
             return lista_materia;
         }
+      public Materia getMateria(int id_materia){
+        return mm.obtener_materia_por_id(id_materia);
+    } 
 }

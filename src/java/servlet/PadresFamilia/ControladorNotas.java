@@ -12,9 +12,20 @@ package servlet.PadresFamilia;
 public class ControladorNotas {
    public String error;
     ModeloNotas mn = new ModeloNotas();
-    public boolean validar(ConsultaNotas cn){
+    public boolean validar(IncludePadres cn){
         boolean autenticado = mn.autentication(cn);
         error = mn.error;
         return autenticado;
+    } 
+    public boolean insertar(IncludePadres ip){
+      boolean registrar = mn.insertarusuario(ip);
+        error = mn.error;
+        return registrar;
+        
+    }
+        public String getViewUser(IncludePadres u){
+        String htmlcode = "";
+        htmlcode += "<b><font color=black><p>Bienvenido</font> " + "<font color=orange> " + u.getUsuario() + "</font></b></p>";
+        return htmlcode;
     } 
 }

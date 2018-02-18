@@ -58,7 +58,7 @@ public class ControladorUsuario {
     }
     public String getViewUser(Usuario u){
         String htmlcode = "";
-        htmlcode += "<br><b><font color=blue><p> Bienvenido  </font>"+ u.getUsuario() + "</b></p>";
+        htmlcode += "<b><font color=black><p>Bienvenido</font> " + "<font color=orange> " + u.getUsuario() + "</font></b></p>";
         return htmlcode;
     } 
 }

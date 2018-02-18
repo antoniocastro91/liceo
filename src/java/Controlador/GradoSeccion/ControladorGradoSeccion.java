@@ -28,6 +28,12 @@ public class ControladorGradoSeccion {
             lista_seccion = this.mgs.listar_GradosSeccions();
             return lista_seccion;
         }
+   public GradoSeccion getGrado(int id_grado){
+        return mgs.obtener_grado_por_id(id_grado);
+    }
+    public GradoSeccion getSeccion(int id_seccion){
+        return mgs.obtener_seccion_por_id(id_seccion);
+    }
         
       
 }

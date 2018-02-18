@@ -1,14 +1,26 @@
-
-<%@page import="Include.Usuario.Usuario"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List"%>
+<%@page import="Include.Usuario.Usuario"%>
 <%@page import="Controlador.ControladorUsuario"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="../Principal/header.jsp"/>
+
 <% 
+    HttpSession sesion = request.getSession(true);
+    String usuario = sesion.getAttribute("usuario") == null ? "" : sesion.getAttribute("usuario").toString();
+    String url = response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/index.jsp");
+    if(usuario == ""){
+        response.sendRedirect(url);
+        return;
+    }
+    Object nivel = sesion.getAttribute("nivel") == null ? null : sesion.getAttribute("nivel");
+    if (Integer.parseInt(nivel.toString()) != 1){
+        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/Vistas/Principal/Principal.jsp"));
+    }
     ControladorUsuario cu = new ControladorUsuario();
+    cu.setId_usuario(Integer.parseInt(session.getAttribute("id_personal").toString()));
     Usuario u = new Usuario();
     List<Usuario> lista_Usuario = cu.listar();
 %>
+<jsp:include page="../Principal/header.jsp"/>
 <div class ="container">
     <div class="row" align="center">
         <div class="col-xs-12 ">
