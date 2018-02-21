@@ -112,7 +112,7 @@
                                 <select type="text" id="materia" name="materia" class="form-control">
                                     <option selected >Materia</option>
                                        <% 
-                                           if(usuario.getId_Rol() == 1){
+                                           if(usuario.getId_Rol() != 1){
                                            for(int f=0; f < lista_materia.size(); f++){
                                                 
                                         %>
@@ -166,12 +166,12 @@
             </fieldset>
         </div>                                    
     </div>                                    
-</div>                                    
+</div><br/>                                            
 <div class ="container">
     <div class="row" align="center">
         <div class="col-xs-12 text-center">
-            <table class="table table-hover table-striped table-responsive">
-                    <thead>
+            <table class="table text-info table-bordered table-hover table-striped table-responsive">
+                    <thead >
                         <tr>
                             <th><center>NIE </center> </th>
                             <th> <center>Nombre del alumno </center> </th>
@@ -188,6 +188,7 @@
                     </table>
                </div>
     </div>
+</div>
 
 <script>
     var lista_calificaciones = [];

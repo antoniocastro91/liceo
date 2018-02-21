@@ -18,11 +18,12 @@ import java.sql.SQLException;
  * @author Victor
  */
 public class Conexion {
+
+    //private String HOST = "localhost";  
     private String USERNAME = "root";
-    private String PASSWORD = "root";
-    private String HOST = "localhost";   
-    //private String PASSWORD="METakl64231";
-    //private String HOST = "https://node72251-sistema.whelastic.net";
+    //private String PASSWORD = "root";
+    private String PASSWORD = "METakl64231";
+    private String HOST = "node72251-sistema.whelastic.net";
     private String Port = "3306";
     private String Databases = "liceojcdp";
     private String classname = "com.mysql.jdbc.Driver";

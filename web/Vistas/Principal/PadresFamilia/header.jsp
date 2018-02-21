@@ -10,8 +10,8 @@
     <c:set var="req" value="${pageContext.request}" />
 	<c:set var="uri" value="${req.requestURI}" />
 	<c:set var="url">${req.requestURL}</c:set>
-	<base href="http://localhost:26683/liceo/" />
-	<!-- <base href="http://sistemmuna.j.sphere48.com/liceojcdp/" /> -->
+	<!--<base href="http://localhost:26683/liceo/" /> -->
+	 <base href="http://sistema.whelastic.net/liceo/" />
       <%-- <link rel="stylesheet" href="resources/css/style2.css" type="text/css" media="all">--%>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="resources/boostrap/bootstrap.min.css">

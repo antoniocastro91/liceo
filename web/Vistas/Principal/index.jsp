@@ -7,8 +7,8 @@
             <c:set var="req" value="${pageContext.request}" />
 	<c:set var="uri" value="${req.requestURI}" />
 	<c:set var="url">${req.requestURL}</c:set>
-	<base href="http://localhost:26683/liceo/" />
-	<!-- <base href="http://sistemmuna.j.sphere48.com/liceojcdp/" /> -->
+	<base href="http://sistema.whelastic.net/liceo/" />
+	<!--<base href="http://localhost:26683/liceo/" /> -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
